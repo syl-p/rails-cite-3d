@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Le Château Comtal
+  body: Découvrez le Château Comtal, cœur historique de la cité de Carcassonne. Plongez dans l’histoire médiévale à travers ses remparts, tours et chemin de ronde. Explorez ce chef-d’œuvre d’architecture militaire et profitez d’une vue imprenable sur la cité et ses environs. Un incontournable pour les passionnés d’histoire et de patrimoine.
+  object_name: chateau_comtal
+  offset_x: 9
+  offset_y: 10
+  offset_z: 5
+
+two:
+  title: Eglise Saint Nazaire
+  body: Visitez la basilique Saint-Nazaire, joyau architectural de la cité de Carcassonne. Admirez ses vitraux gothiques, ses sculptures romanes et son atmosphère paisible. Ce lieu chargé d’histoire allie art et spiritualité, offrant une expérience unique au cœur de la cité médiévale.
+  object_name: Basilique_Saint-Nazaire
+  offset_x: 10
+  offset_y: 10
+  offset_z: 10
