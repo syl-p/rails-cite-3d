@@ -1,56 +1,62 @@
-import {useEffect} from "react";
-import  {useThree} from "@react-three/fiber"
-import * as THREE from "three";
-import {Input} from "@/components/ui/input.jsx";
-import {useForm} from "@inertiajs/react";
-import {Button} from "@/components/ui/button.jsx";
+import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel.jsx";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.jsx";
+import UploadMediaDialog from "@/components/UploadMediaDialog.jsx";
+import {Link} from "@inertiajs/react";
 
 export default function show({current_user, part, media}) {
-    const {data, setData, processing, post} = useForm({
-        file: null
-    })
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        post(`/parts/${part.id}/media`, {
-            onSuccess: (data) => {
-                media.push(data)
-            },
-            onError: (error) => {
-                console.error(error)
-            }
-        })
-    }
 
-    const UploadForm = () => {
-        return <>
-            <form onSubmit={handleSubmit} encType='multipart/form-data'>
-                <Input required
-                       name="file"
-                       type="file" />
-                <Button type="submit" disabled={processing}>Upload !</Button>
-            </form>
-        </>
-    }
+    const Cta = ({children}) => {
+        return <div className="w-full group relative flex items-center justify-end space-x-2">
+                                <span
+                                    className="relative z-10 text-sm font-bold uppercase leading-6 tracking-wide before:absolute
+                                    before:-left-6 before:-top-1/2 before:-z-10 before:h-12 before:w-12 before:rounded-full
+                                    before:bg-yellow-400 before:content-[''] group-hover:underline">{children}</span>
 
-    const ImageItem = (medium) => {
-        return <>
-            {medium.file_url}
-        </>
+            <div className="relative">
+                                  <span className="inline-block transition-transform group-hover:translate-x-1">
+                                    ➔
+                                  </span>
+            </div>
+        </div>
     }
 
     return <>
-        <h1 className="mb-6">{part.title}</h1>
-        {part.body}
-        <hr/>
-        <ul>
-            {media.map(medium => (<li key={medium.id}>
-                {medium.id} - {medium.file_url}
-            </li>))}
-        </ul>
-        <hr/>
-        {
-            current_user && <UploadForm/>
+        <Link href="/" className="text-xl">Découvrir la cité</Link>
+        <h1 className="text-4xl mb-6">{part.title}</h1>
+        <p className="mb-6">{part.description}</p>
+        {media && media.length > 0 ?
+            <Carousel className="my-6">
+                <CarouselContent>
+                    {media.map(medium => (<CarouselItem key={medium.id} className="basis-1/3 h-[300px] w-[190px]">
+                        <img src={medium.file_url} className="w-fit h-full w-full rounded-xl object-cover"/>
+                    </CarouselItem>))}
+                </CarouselContent>
+            </Carousel> :
+            <div className="py-6 text-xl font-bold">Aucune photo n'a encore été postée sur la galerie de cette partie de
+                la cité.</div>
         }
+
+
+        {
+            <div className="w-full flex justify-end mb-6">
+                {
+                    current_user ? <UploadMediaDialog partId={part.id}>
+                            <Cta>
+                                Participe à la Galerie photo.
+                            </Cta>
+                        </UploadMediaDialog> :
+                        <Cta>
+                            Connecte toi.
+                        </Cta>
+                }
+            </div>
+        }
+        <p>{part.body}</p>
+        <p>{part.body}</p>
+        <p>{part.body}</p>
+        <p>{part.body}</p>
+        <p>{part.body}</p>
+        <p>{part.body}</p>
     </>
 }

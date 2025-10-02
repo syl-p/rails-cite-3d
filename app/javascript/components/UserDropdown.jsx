@@ -8,14 +8,15 @@ import {
 } from "./ui/dropdown-menu.jsx"
 import {Link} from "@inertiajs/react";
 import SettingsBtn from "./SettingsBtn.jsx";
+import {Button} from "@/components/ui/button.jsx";
 
 export default function UserDropdown({user}) {
     return <>
         <DropdownMenu>
-            <DropdownMenuTrigger>
-                <div>
+            <DropdownMenuTrigger asChild>
+                <Button>
                     {user.username}
-                </div>
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuLabel>Mon compte</DropdownMenuLabel>

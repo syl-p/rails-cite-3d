@@ -42,6 +42,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_134207) do
   create_table "media", force: :cascade do |t|
     t.integer "part_id"
     t.integer "user_id"
+    t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["part_id"], name: "index_media_on_part_id"
@@ -49,8 +50,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_134207) do
   end
 
   create_table "parts", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
+    t.string "title", null: false
+    t.text "description"
+    t.text "body", null: false
     t.string "object_name"
     t.float "offset_x", default: 0.0
     t.float "offset_y", default: 0.0

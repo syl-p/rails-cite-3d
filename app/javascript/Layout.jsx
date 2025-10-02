@@ -12,7 +12,7 @@ export default function Layout({children}) {
     const {current_user, part, parts} = usePage().props
     const [currentIndex, setCurrentIndex] = useState(0);
     useEffect(() => {
-        if(part) {
+        if (part) {
             const currentIndex = parts.findIndex(p => p.id === part.id)
             setCurrentIndex(currentIndex);
         }
@@ -29,32 +29,33 @@ export default function Layout({children}) {
     }
 
     return (
-        <main className="p-12">
-            <header className="z-50 px-18 fixed flex justify-between top-18 left-0 w-full">
+        <main className="p-4">
+            <header className="z-50 px-8 fixed flex items-center justify-between top-8 left-0 w-full">
                 <div>
                     <Link href="/" className="uppercase font-spectral flex space-x-3 items-center">
                         <span className="block p-2 bg-yellow-500 text-white font-bold">
                         </span>
-                                    <span className="hidden md:block">
+                        <span className="hidden md:block">
                           Cité<br/>
                           de <span className="font-bold">Carcassonne</span>
                         </span>
                     </Link>
                 </div>
                 <div className="flex-1 flex space-x-3 items-center justify-end">
-                    {current_user ? <UserDropdown user={current_user} />: <LoginBtn />}
+                    {current_user ? <UserDropdown user={current_user}/> : <LoginBtn/>}
                 </div>
             </header>
-            <section className="grid grid-cols-6 gap-6">
-                <section className={"relative border h-[calc(100vh-theme(spacing.24))] " + (part ? 'col-span-3' : 'col-span-6')}>
+            <section className="lg:grid lg:grid-cols-6 lg:gap-6">
+                <section
+                    className={"relative lg:sticky lg:left-0 lg:top-4 border mb-6 h-[50vh] lg:mb-0 lg:h-[calc(100vh-theme(spacing.8))] rounded shadow overflow-hidden " + (part ? 'lg:col-span-3' : 'lg:col-span-6')}>
                     <Canvas flat>
-                        <Experience />
+                        <Experience/>
                     </Canvas>
                     <div className="absolute left-0 bottom-0">
-                        {part && <Pagination />}
+                        {part && <Pagination/>}
                     </div>
                 </section>
-                {part && <section className="col-span-3 pt-22">
+                {part && <section className="col-span-3 lg:pt-22">
                     {children}
                 </section>}
             </section>

@@ -11,7 +11,7 @@ class PartsController < ApplicationController
   def show
     render inertia: 'parts/show', props: {
       part: @part,
-      media: @part.media.as_json
+      media: @part.media.map { |medium| medium.as_json }
     }
   end
 

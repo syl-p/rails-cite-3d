@@ -7,7 +7,8 @@ class Parts::MediaController < ApplicationController
     if @medium.save
       redirect_to part_path(params[:id])
     else
-      render json: { errors: @medium.errors.full_messages }, status: :unprocessable_entity
+      # render json: { errors: @medium.errors }, status: :unprocessable_entity
+      redirect_to request.referrer, inertia: { errors: @medium.errors }
     end
   end
 end
