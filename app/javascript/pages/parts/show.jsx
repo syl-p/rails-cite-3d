@@ -24,39 +24,54 @@ export default function show({current_user, part, media}) {
     return <>
         <Link href="/" className="text-xl">Découvrir la cité</Link>
         <h1 className="text-4xl mb-6">{part.title}</h1>
-        <p className="mb-6">{part.description}</p>
-        {media && media.length > 0 ?
-            <Carousel className="my-6">
-                <CarouselContent>
-                    {media.map(medium => (<CarouselItem key={medium.id} className="basis-1/3 h-[300px] w-[190px]">
-                        <img src={medium.file_url} className="w-fit h-full w-full rounded-xl object-cover"/>
-                    </CarouselItem>))}
-                </CarouselContent>
-            </Carousel> :
-            <div className="py-6 text-xl font-bold">Aucune photo n'a encore été postée sur la galerie de cette partie de
-                la cité.</div>
-        }
-
-
-        {
-            <div className="w-full flex justify-end mb-6">
-                {
-                    current_user ? <UploadMediaDialog partId={part.id}>
-                            <Cta>
-                                Participe à la Galerie photo.
-                            </Cta>
-                        </UploadMediaDialog> :
-                        <Cta>
-                            Connecte toi.
-                        </Cta>
+        <Tabs defaultValue="description">
+            <TabsList>
+                <TabsTrigger value="description">Description</TabsTrigger>
+                <TabsTrigger value="comments">Commentaires</TabsTrigger>
+            </TabsList>
+            <TabsContent value="description">
+                <p className="mb-6">{part.description}</p>
+                {media && media.length > 0 ?
+                    <Carousel className="my-6">
+                        <CarouselContent>
+                            {media.map(medium => (
+                                <CarouselItem key={medium.id} className="basis-1/3 h-[300px] w-[190px]">
+                                    <img src={medium.file_url} className="w-fit h-full w-full rounded-xl object-cover"/>
+                                </CarouselItem>))}
+                        </CarouselContent>
+                    </Carousel> :
+                    <div className="py-6 text-xl font-bold">Aucune photo n'a encore été postée sur la galerie de cette
+                        partie de
+                        la cité.</div>
                 }
-            </div>
-        }
-        <p>{part.body}</p>
-        <p>{part.body}</p>
-        <p>{part.body}</p>
-        <p>{part.body}</p>
-        <p>{part.body}</p>
-        <p>{part.body}</p>
+
+
+                {
+                    <div className="w-full flex justify-end mb-12">
+                        {
+                            current_user ? <UploadMediaDialog partId={part.id}>
+                                    <Cta>
+                                        Participe à la Galerie photo.
+                                    </Cta>
+                                </UploadMediaDialog> :
+                                <Cta>
+                                    Connecte toi.
+                                </Cta>
+                        }
+                    </div>
+                }
+                <p>{part.body}</p>
+                <p>{part.body}</p>
+                <p>{part.body}</p>
+                <p>{part.body}</p>
+                <p>{part.body}</p>
+                <p>{part.body}</p>
+            </TabsContent>
+            <TabsContent value="comments">
+                <ul>
+                    {part.comments.map((comment) => (<li>{comment.content}</li>))}
+                </ul>
+            </TabsContent>
+        </Tabs>
     </>
 }

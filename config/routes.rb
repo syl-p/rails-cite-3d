@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "comments/update"
+  get "comments/destroy"
   get 'inertia-example', to: 'inertia_example#index'
   resource :session
   resources :passwords, param: :token

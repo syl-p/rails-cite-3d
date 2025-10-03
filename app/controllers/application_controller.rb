@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def parts
-    Part.all
+    Part.all.preload(:comments).serialize_hash
   end
 end
